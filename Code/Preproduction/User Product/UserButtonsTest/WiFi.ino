@@ -45,10 +45,10 @@ void reconnect() {
   while (!client.connected()) {
     Serial.print("Forsøger at oprette MQTT forbindelse...");
 
-    if (client.connect("UNIQUE_CLIENT_NAME", mqtt_user, mqtt_pass)) { // Forbinder til klient med mqtt bruger og password
+    if (client.connect("User", mqtt_user, mqtt_pass)) { // Forbinder til klient med mqtt bruger og password
       Serial.println("connected");
       // Derudover subsribes til topic "Test" hvor NodeMCU modtager payload beskeder fra
-      client.subscribe("Test");
+      client.subscribe("FromMCU");
       // Der kan subscribes til flere specifikke topics
       //client.subscribe("Test1");
       // Eller til samtlige topics ved at bruge '#' (Se Power Point fra d. 18. marts)
