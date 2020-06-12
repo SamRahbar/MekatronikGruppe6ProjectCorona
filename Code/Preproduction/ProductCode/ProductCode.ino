@@ -17,6 +17,9 @@ const char *uniqueID = "B"; // Unique MQTT-ID
 
 
 
+int flowerState = 0;
+
+
 
 //-----MQTT SPECIFIC-----
 const char *mqtt_server = "hairdresser.cloudmqtt.com"; //The name of the mqtt site
@@ -72,5 +75,9 @@ void setup() {
 void loop() {
   buttonController();      // DON'T CLICK THE SAME BUTTON TWICE IN A ROW
   MQTTLoop();
+<<<<<<< Updated upstream
   LEDloop();
+=======
+  flowerStateSwitch();
+>>>>>>> Stashed changes
 }
