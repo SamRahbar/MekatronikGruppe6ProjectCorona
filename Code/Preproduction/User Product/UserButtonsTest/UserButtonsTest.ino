@@ -11,9 +11,9 @@
 // Change these variables depending on which product it is
 const char* ssid = "Ellens iPhone"; //Network name
 const char* password = "karamellen"; //Wifi-password
-const char *recievingTopic = "fromAtoB"; // Subscribes to this topic
-const char *sendingTopic = "fromBtoA"; // Sends messages with this topic
-const char *uniqueID = "B"; // Unique MQTT-ID
+const char *recievingTopic = "toA"; // Subscribes to this topic
+const char *sendingTopic = "fromA"; // Sends messages with this topic
+const char *uniqueID = "A"; // Unique MQTT-ID
 
 
 
