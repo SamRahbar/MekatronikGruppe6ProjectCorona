@@ -1,9 +1,9 @@
-void MQTTSetup(){
+void MQTTSetup() {
   client.setServer(mqtt_server, mqtt_port); // Forbinder til mqtt serveren (defineret længere oppe)
   client.setCallback(callback); // Ingangsætter den definerede callback funktion hver gang der er en ny besked på den subscribede "cmd"- topic
 }
 
-void MQTTLoop(){
+void MQTTLoop() {
   // Hvis der opstår problemer med forbindelsen til mqtt broker oprettes forbindelse igen ved at køre client loop
   if (!client.connected()) {
     reconnect();
@@ -29,21 +29,45 @@ void callback(char* byteArraytopic, byte* byteArrayPayload, unsigned int length)
     payload = ""; // Nulstil payload variablen så forloopet ikke appender til en allerede eksisterende payload
     for (int i = 0; i < length; i++) {
       payload += (char)byteArrayPayload[i];
-      // For-loop: tag hvert tegn i hele længden af den inkomne besked, og konverter denne til en char. Append tegnene 1 efter 1:
-      // Eksempel:
-      // Besked = Study Abroad
-      // Length = 12
-      // Loop 1 = "S"
-      // Loop 2 = "St" osv.
-      // Loop (length) = "Study Abroad"
     }
 
+    String data[2];
+    bool curQot = false;
+    int curDat = 0;
+    for (int i = 0; i < payload.length(); i++) {
+      //Checks if we are inside qotation marks
+      if (payload[i] == '"'){
+        if(curQot == false){
+          curQot = true;
+        }
+        else{
+          curQot = false;
+          curDat++;
+        }
+      }
+      //Fills out string with contents inside quotations
+      if (curQot){
+        data[curDat] = data[curDat] + payload[i];
+      }
+    }
 
+    //Removes first quotation mark of each datapoint.
+    data[0].remove(0,1);
+    data[1].remove(0,1);
+
+    Serial.println("Data array = " + data[0] + " : " + data[1]);
+     
+    //---- Color data converter----
+    hex = "0x" + data[1]; //Converts incoming string to readable hex
+    Serial.println("Hex = " + hex);
+    color = strtol(hex.c_str(), NULL, 0); //Converts string to long
+
+    
     // Depending on payload message, set at state for the OLED to display a specific message
-    if (payload == "ONE") { // Collect fresh weather data every 5 minutes
+    if (data[0] == "ONE") { // Collect fresh weather data every 5 minutes
       ledState = 1;
     }
-    if (payload == "TWO") { // 3 hour forecast
+    if (data[0] == "TWO") { // 3 hour forecast
       ledState = 2;
     }
     if (payload == "THREE") { // 6 hour forecast

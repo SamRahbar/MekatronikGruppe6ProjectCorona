@@ -9,11 +9,11 @@
 
 // -------IS IT PRODUCT A OR PRODUCT B?------
 // Change these variables depending on which product it is
-const char* ssid = "Ellens iPhone"; //Network name
-const char* password = "karamellen"; //Wifi-password
-const char *recievingTopic = "toA"; // Subscribes to this topic
-const char *sendingTopic = "fromA"; // Sends messages with this topic
-const char *uniqueID = "A"; // Unique MQTT-ID
+const char* ssid = "XKEYSCORE #C-137"; //Network name
+const char* password = "arduinocode"; //Wifi-password
+const char *recievingTopic = "toB"; // Subscribes to this topic
+const char *sendingTopic = "fromB"; // Sends messages with this topic
+const char *uniqueID = "B"; // Unique MQTT-ID
 
 
 
@@ -26,7 +26,7 @@ const char *mqtt_pass = "Sam"; //Defines the mqtt code
 String payload; // Definerer variablen 'payload' i det globale scope (payload er navnet på besked-variablen)
 
 
-
+  
 
 //-----FUNCTION SETUP-----
 void callback(char* byteArraytopic, byte* byteArrayPayload, unsigned int length); // Placeholder for the callback function for later use. The function itself comes later
@@ -38,27 +38,17 @@ WiFiClient espClient; // Initialiserer wifi bibloteket ESP8266Wifi, som er inklu
 PubSubClient client(mqtt_server, mqtt_port, callback, espClient); // Initialiserer bibloteket for at kunne modtage og sende beskeder til mqtt. Den henter fra definerede mqtt server og port. Den henter fra topic og beskeden payload
 
 
-
-
-
-
 //-----LED SPECIFIC-----
 int ledState = 0;
+String hex;
+long color;
 
 // How many leds in your strip?
 #define NUM_LEDS 7
-// For led chips like WS2812, which have a data line, ground, and power, you just
-// need to define DATA_PIN.  For led chipsets that are SPI based (four wires - data, clock,
-// ground, and power), like the LPD8806 define both DATA_PIN and CLOCK_PIN
-// Clock pin only needed for SPI based chipsets when not using hardware SPI
 #define DATA_PIN 4
-//#define CLOCK_PIN 13
 
 // Define the array of leds
 CRGB leds[NUM_LEDS];
-
-
-
 
 //-----BUTTON SPECIFIC-----
 const int buttonPin1 = D1;
