@@ -75,9 +75,6 @@ void setup() {
 void loop() {
   buttonController();      // DON'T CLICK THE SAME BUTTON TWICE IN A ROW
   MQTTLoop();
-<<<<<<< Updated upstream
   LEDloop();
-=======
   flowerStateSwitch();
->>>>>>> Stashed changes
 }

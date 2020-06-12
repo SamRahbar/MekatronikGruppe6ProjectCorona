@@ -1,4 +1,4 @@
-void stateSwitch() {
+void flowerStateSwitch() {
 
   switch (flowerState) {
     case 0: // resting
