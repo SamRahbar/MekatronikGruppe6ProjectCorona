@@ -60,6 +60,12 @@ CRGB leds[NUM_LEDS];
 
 
 
+
+
+int flowerState = 0;  // 0 - resting. 1 - wake up. 2 - blossom. 3 - fade.
+
+
+
 //-----BUTTON SPECIFIC-----
 const int buttonPin1 = D1;
 const int buttonPin2 = D2;
@@ -82,5 +88,7 @@ void setup() {
 void loop() {
   buttonController();      // DON'T CLICK THE SAME BUTTON TWICE IN A ROW
   MQTTLoop();
-  LEDloop();
+  //LEDloop();
+
+  stateSwitch();
 }
