@@ -1,18 +1,16 @@
 
 void buttonSetup() {
-  pinMode(buttonPin1, INPUT_PULLUP);
-  pinMode(buttonPin2, INPUT_PULLUP);
+  pinMode(Sensor, INPUT);
 }
 
 void buttonController() {
 
-  buttonState1 = digitalRead(buttonPin1);
-  buttonState2 = digitalRead(buttonPin2);
+  SensorState1 = digitalRead(Sensor);
 
-  if (buttonState1 == HIGH) {
+  if (SensorState1 == HIGH) {
     var = 1;
   }
-  if (buttonState2 == HIGH) {
+  else if (SensorState1 == LOW) {
     var = 2;
   }
 
