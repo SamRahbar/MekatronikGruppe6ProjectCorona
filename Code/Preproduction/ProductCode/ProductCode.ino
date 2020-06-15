@@ -7,7 +7,7 @@
 // #include <SPI.h> // Not necessary?
 
 
-// -------IS IT PRODUCT A OR PRODUCT B?------
+//-------IS IT PRODUCT A OR PRODUCT B?------
 // Change these variables depending on which product it is
 const char* ssid = "iPhone"; //Network name
 const char* password = "yus0304sen"; //Wifi-password
@@ -15,11 +15,8 @@ const char *recievingTopic = "toB"; // Subscribes to this topic
 const char *sendingTopic = "fromB"; // Sends messages with this topic
 const char *uniqueID = "B"; // Unique MQTT-ID
 
-
-
+//----- FLOWER STATES -----
 int flowerState = 0;
-
-
 
 //-----MQTT SPECIFIC-----
 const char *mqtt_server = "hairdresser.cloudmqtt.com"; //The name of the mqtt site
@@ -28,8 +25,6 @@ const char *mqtt_user = "Sam"; // Defines the mqtt username
 const char *mqtt_pass = "Sam"; //Defines the mqtt code
 String payload; // Definerer variablen 'payload' i det globale scope (payload er navnet på besked-variablen)
 
-
-  
 
 //-----FUNCTION SETUP-----
 void callback(char* byteArraytopic, byte* byteArrayPayload, unsigned int length); // Placeholder for the callback function for later use. The function itself comes later
@@ -53,24 +48,24 @@ long color;
 // Define the array of leds
 CRGB leds[NUM_LEDS];
 
-//-----BUTTON SPECIFIC-----
+//-----Sensor SPECIFIC-----
 const int Sensor = D1;
 
 int SensorState1 = 0;
 int lastVar = 0;   // the previous reading from the input pin
 int var = 0;
 
-
+//----- MAIN CODE ------
 void setup() {
   Serial.begin(9600);
   FastLED.addLeds<WS2812B, DATA_PIN, GRB>(leds, NUM_LEDS);
-  buttonSetup();
+  SensorSetup();
   wifiSetup();
   MQTTSetup();
 }
 
 void loop() {
-  buttonController();      // DON'T CLICK THE SAME BUTTON TWICE IN A ROW
+  SensorController();      // DON'T CLICK THE SAME BUTTON TWICE IN A ROW
   MQTTLoop();
   flowerStateSwitch();
 }

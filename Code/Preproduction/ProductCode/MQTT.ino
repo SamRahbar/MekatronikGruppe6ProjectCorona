@@ -12,7 +12,6 @@ void MQTTLoop() {
 }
 
 
-
 // Definerer callback funktionen der modtager beskeder fra mqtt
 // OBS: den her funktion kører hver gang MCU'en modtager en besked via mqtt
 void callback(char* byteArraytopic, byte* byteArrayPayload, unsigned int length) {

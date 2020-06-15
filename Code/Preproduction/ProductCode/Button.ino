@@ -1,10 +1,8 @@
-
-void buttonSetup() {
+void SensorSetup() {
   pinMode(Sensor, INPUT);
 }
 
-void buttonController() {
-
+void SensorController() {
   SensorState1 = digitalRead(Sensor);
 
   if (SensorState1 == HIGH) {
