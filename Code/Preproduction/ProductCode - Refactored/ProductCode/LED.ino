@@ -1,11 +1,9 @@
 void LEDloop() {
-
   fill_solid(leds, NUM_LEDS, CRGB(0x000000));
-
   switch (ledState) {
     case 0:
       break;
-    case 1:
+    case 1: //Resting
       leds[0] = CRGB(color);
       break;
     case 2:

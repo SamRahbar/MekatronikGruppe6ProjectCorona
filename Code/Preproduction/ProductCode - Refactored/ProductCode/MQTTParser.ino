@@ -1,5 +1,5 @@
 void MQTTParser() {
-  
+
   //-----STRING ARRAY PARSER-----
   String data[2];//Defines array of information expected
   bool curQot = false;//Bool to detect if we are inside quotation marks
@@ -32,19 +32,15 @@ void MQTTParser() {
   Serial.println("Hex = " + hex);
   color = strtol(hex.c_str(), NULL, 0); //Converts string to long
 
-
-  // Depending on payload message, set at state for the OLED to display a specific message
-  if (data[0] == "ONE") { // Collect fresh weather data every 5 minutes
-    ledState = 1;
+  
+  if (data[0] == "Bloom") {
+    flowerState = 1;
   }
-  if (data[0] == "TWO") { // 3 hour forecast
-    ledState = 2;
+  else if (data[0] == "Fade") {
+    flowerState = 3;
   }
-  if (payload == "THREE") { // 6 hour forecast
-    ledState = 3;
-  }
-  if (payload == "FOUR") { // 9 hour forecast
-    ledState = 4;
+  else if (data[0] == "DataRefresh"){
+    Serial.print("DataRefreshed");
   }
   else { // If the signal from the mqtt is not one of the available options, give a message to the mqtt server and pass
     Serial.println(payload);

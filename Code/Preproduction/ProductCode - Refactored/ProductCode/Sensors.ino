@@ -1,9 +1,11 @@
 void SensorSetup() {
-  pinMode(Sensor, INPUT);
+  pinMode(SensorPin, INPUT);
+  //attachInterrupt(D1, SensorModeChange, CHANGE);
 }
 
+
 void SensorController() {
-  SensorState1 = digitalRead(Sensor);
+  SensorState1 = digitalRead(SensorPin);
 
   if (SensorState1 == HIGH) {
     var = 1;
@@ -15,11 +17,11 @@ void SensorController() {
   if (var != lastVar) {
     switch (var) {
       case 1:
-        client.publish(sendingTopic, "ONE");
+        client.publish(sendingTopic, "Bloom");//Sends if motion has stopped being sensed
         lastVar = 1;
         break;
       case 2:
-        client.publish(sendingTopic, "TWO");
+        client.publish(sendingTopic, "Bloom");//Sends if motion has been sensed
         lastVar = 2;
         break;
     }
