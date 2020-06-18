@@ -1,7 +1,7 @@
 void MQTTParser() {
 
   //-----STRING ARRAY PARSER-----
-  String data[2];//Defines array of information expected
+  String data[3];//Defines array of information expected
   bool curQot = false;//Bool to detect if we are inside quotation marks
   int curDat = 0;//Int to keep track of current data index
   for (int i = 0; i < payload.length(); i++) { //Splits up the string array we receive from NodeRed into a stringarray we can use in arduino
@@ -24,6 +24,7 @@ void MQTTParser() {
   //Removes first quotation mark of each datapoint since they are included during the processing step.
   data[0].remove(0, 1);
   data[1].remove(0, 1);
+  data[2].remove(0, 1);
 
   Serial.println("Data array = " + data[0] + " : " + data[1]);
 
@@ -32,6 +33,9 @@ void MQTTParser() {
   Serial.println("Hex = " + hex);
   color = strtol(hex.c_str(), NULL, 0); //Converts string to long
 
+  //----STEPPER ACCEL DEFINE-----
+  StepperAccel = data[2].toInt();
+  Serial.println("Stepper Acceleration = " + StepperAccel);
   
   if (data[0] == "Bloom") {
     flowerState = 1;

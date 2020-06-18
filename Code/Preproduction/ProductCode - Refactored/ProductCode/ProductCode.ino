@@ -3,6 +3,7 @@
 
 //-----LIBRARIES-----
 #include <FastLED.h>
+#include <AccelStepper.h>
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
 #include <ESP8266HTTPClient.h>
@@ -21,6 +22,9 @@ WiFiClient espClient; // Initialiserer wifi bibloteket ESP8266Wifi, som er inklu
 // Opretter forbindelse til mqtt klienten:
 PubSubClient client(mqtt_server, mqtt_port, callback, espClient); // Initialiserer bibloteket for at kunne modtage og sende beskeder til mqtt. Den henter fra definerede mqtt server og port. Den henter fra topic og beskeden payload
 
+// Creates an instance of stepper motor object
+AccelStepper myStepper(motorInterfaceType, stepPin, dirPin);
+
 //----- MAIN CODE ------
 void setup() {
   Serial.begin(BAUD_RATE);
@@ -28,10 +32,10 @@ void setup() {
   SensorSetup();
   wifiSetup();
   MQTTSetup();
+  StepperSetup();
 }
 
 void loop() {
-  SensorController();
   MQTTLoop();
   flowerStateSwitch();
   //LEDloop();

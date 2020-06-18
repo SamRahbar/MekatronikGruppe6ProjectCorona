@@ -5,9 +5,9 @@
 // Change these variables depending on which product it is
 const char* ssid = "XKEYSCORE #C-137"; //Network name
 const char* password = "arduinocode"; //Wifi-password
-const char *recievingTopic = "toB"; // Subscribes to this topic
-const char *sendingTopic = "fromB"; // Sends messages with this topic
-const char *uniqueID = "B"; // Unique MQTT-ID
+const char *recievingTopic = "toA"; // Subscribes to this topic
+const char *sendingTopic = "fromA"; // Sends messages with this topic
+const char *uniqueID = "A"; // Unique MQTT-ID
 
 //-----MQTT SETTINGS-----
 const char *mqtt_server = "hairdresser.cloudmqtt.com"; //The name of the mqtt site
@@ -23,9 +23,13 @@ long color; //Saved value
 
 //-----SENSOR SETTINGS-----
 const int SensorPin = D1; //Sensor datapin
-int SensorState1 = 0; //Sensors current state
-int lastVar = 0;   // the previous reading from the input pin
-int var = 0;  //current reading saved
+void ICACHE_RAM_ATTR SensorModeChange(); //Interrupt Method
+
+//-----MOTOR SETTINGS------
+const int dirPin = D6;
+const int stepPin = D5;
+int StepperAccel;
+#define motorInterfaceType 1
 
 //----- FLOWER STATES -----
 int flowerState = 0;

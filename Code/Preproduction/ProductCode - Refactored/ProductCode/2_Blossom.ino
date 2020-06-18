@@ -1,5 +1,5 @@
 void Blossom(){
-  //Serial.println("Blossoming");
+  Serial.println("Blossoming");
   fill_solid(leds,NUM_LEDS,CRGB(color));
   FastLED.show();
 }
