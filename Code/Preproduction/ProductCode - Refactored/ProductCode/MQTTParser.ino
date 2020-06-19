@@ -34,8 +34,8 @@ void MQTTParser() {
   color = strtol(hex.c_str(), NULL, 0); //Converts string to long
 
   //----STEPPER ACCEL DEFINE-----
-  StepperAccel = data[2].toInt();
-  Serial.println("Stepper Acceleration = " + StepperAccel);
+  myStepper.setSpeed(data[2].toInt());
+  Serial.println("Stepper Acceleration = " + StepSpeed);
   
   if (data[0] == "Bloom") {
     flowerState = 1;

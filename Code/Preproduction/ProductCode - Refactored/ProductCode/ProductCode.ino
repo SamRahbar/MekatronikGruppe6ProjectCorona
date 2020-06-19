@@ -33,10 +33,10 @@ void setup() {
   wifiSetup();
   MQTTSetup();
   StepperSetup();
+  MicroSwitchSetup();
 }
 
 void loop() {
   MQTTLoop();
   flowerStateSwitch();
-  //LEDloop();
 }

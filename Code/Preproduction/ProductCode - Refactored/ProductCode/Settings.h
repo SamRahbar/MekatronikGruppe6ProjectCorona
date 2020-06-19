@@ -26,10 +26,21 @@ const int SensorPin = D1; //Sensor datapin
 void ICACHE_RAM_ATTR SensorModeChange(); //Interrupt Method
 
 //-----MOTOR SETTINGS------
-const int dirPin = D6;
-const int stepPin = D5;
-int StepperAccel;
+#define dirPin D6
+#define stepPin D5
+#define StepDistance 1000
+#define StepMaxSpeed 2500
+#define StepAccel 500
+int StepSpeed;
+
 #define motorInterfaceType 1
+
+//-----MICROSWITCHES------
+#define Switch1 D7
+#define Switch2 D8
+void ICACHE_RAM_ATTR MicroSwitchStates();
+volatile int SwitchLim1 = 0;
+volatile int SwitchLim2 = 0;
 
 //----- FLOWER STATES -----
 int flowerState = 0;
