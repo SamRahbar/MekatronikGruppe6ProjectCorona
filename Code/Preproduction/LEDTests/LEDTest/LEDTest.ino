@@ -11,6 +11,9 @@ void ICACHE_RAM_ATTR MicroSwitchStates2();
 
 volatile int StatePick = 0;
 
+long ttime;
+long pauseTime = 100;
+
 void MicroSwitchSetup() {
   pinMode(Switch1, INPUT);
   pinMode(Switch2, INPUT);
@@ -44,6 +47,7 @@ void setup() {
 void loop() {
   switchState();
   //Serial.println("StatePick = " + StatePick);
+  ttime = millis();
 }
 
 void switchState() {
@@ -54,18 +58,18 @@ void switchState() {
       break;
     case 1: //FadingDown
       Serial.println("FadingDown");
-      fadeDown(10);
+      fadeDown();
       StatePick = 0;
       break;
     case 2: //FadingUp
       Serial.println("FadingUp");
-      fadeUp(10);
+      fadeUp();
       StatePick = 0;
       break;
     case 3: //FadinUpAndDown
       Serial.println("FadingUpThenDown");
-      fadeUp(10);
-      fadeDown(10);
+      fadeUp();
+      fadeDown();
       StatePick = 0;
       break;
     case 4:
@@ -74,27 +78,32 @@ void switchState() {
   }
 }
 
-void fadeDown(int LightSpeed) {
+void fadeDown() {//Implement millis
   fill_solid(leds, NUM_LEDS, CRGB(255, 0, 0));
   FastLED.setBrightness(255);
-  for (int i = 255; i > 1; i--) {
+  int i = 255;
+  long prevTime;
+  while (i > 0) {
     FastLED.setBrightness(i);
     FastLED.show();
-    delay(LightSpeed);
+
   }
 }
 
-void fadeUp(int LightSpeed) {
+void fadeUp() {
   fill_solid(leds, NUM_LEDS, CRGB(0, 0, 255));
   FastLED.setBrightness(0);
-  for (int i = 0; i <= 255; i++) {
+
+  int i = 0;
+  long prevTime;
+  while (i <= 255) {
     FastLED.setBrightness(i);
     FastLED.show();
-    delay(LightSpeed);
+    i++;
   }
 }
 
-void breathe(){
-  fadeUp(0);
-  fadeDown(0);
+void breathe() { //Make it changable with a speed variable
+  fadeUp();
+  fadeDown();
 }

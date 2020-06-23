@@ -5,9 +5,9 @@
 // Change these variables depending on which product it is
 const char* ssid = "XKEYSCORE #C-137"; //Network name
 const char* password = "arduinocode"; //Wifi-password
-const char *recievingTopic = "toA"; // Subscribes to this topic
-const char *sendingTopic = "fromA"; // Sends messages with this topic
-const char *uniqueID = "A"; // Unique MQTT-ID
+const char *recievingTopic = "toB"; // Subscribes to this topic
+const char *sendingTopic = "fromB"; // Sends messages with this topic
+const char *uniqueID = "B"; // Unique MQTT-ID
 
 //-----MQTT SETTINGS-----
 const char *mqtt_server = "hairdresser.cloudmqtt.com"; //The name of the mqtt site
@@ -16,10 +16,41 @@ const char *mqtt_user = "Sam"; // Defines the mqtt username
 const char *mqtt_pass = "Sam"; //Defines the mqtt passcode
 String payload; // Definerer variablen 'payload' i det globale scope (payload er navnet på besked-variablen)
 
+//-----TIME DEFINITIONS----
+long ttime;
+
+bool startMotor = false;
+bool FadeUpRunning = false;
+bool FadeDownRunning = false;
+
 //-----LED SETTINGS-----
-int ledState = 0;
 String hex; //Used to convert hex to long
 long color; //Saved value
+
+long lastHueTime = 0;
+long lastSatTime = 0;
+long lastValTime = 0;
+
+bool HueFlip = false;
+bool SatFlip = false;
+bool ValFlip = false;
+
+int MaxHue = 255;
+int MinHue = 0;
+
+int MaxSat = 255;
+int MinSat = 250;
+
+int MaxVal = 255;
+int MinVal = 100;
+
+int CurHue = 0;
+int CurSat = 0;
+int CurVal = 0;
+
+int HueT = 20;
+int SatT = 100;
+int ValT = 100;
 
 //-----SENSOR SETTINGS-----
 const int SensorPin = D1; //Sensor datapin
@@ -28,15 +59,16 @@ void ICACHE_RAM_ATTR SensorModeChange(); //Interrupt Method
 //-----MOTOR SETTINGS------
 #define dirPin D6
 #define stepPin D5
-#define StepDistance 1000
-#define StepMaxSpeed 2500
+#define StepDistance 500
+#define StepMaxSpeed 1000
 #define StepAccel 500
-int StepSpeed;
+int StepSpeed = 1000;
+int MotorState = 0;
 
 #define motorInterfaceType 1
 
 //-----MICROSWITCHES------
-#define Switch1 D7
+#define Switch1 D8
 #define Switch2 D8
 void ICACHE_RAM_ATTR MicroSwitchStates();
 volatile int SwitchLim1 = 0;

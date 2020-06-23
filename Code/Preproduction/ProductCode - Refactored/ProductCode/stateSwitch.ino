@@ -7,7 +7,6 @@ void flowerStateSwitch() {
     case 1: // Bloom
       Bloom();
       //Serial.println("Blooming");
-      flowerState = 2;
       break;
     case 2: // Blossom
       Blossom();
@@ -16,7 +15,6 @@ void flowerStateSwitch() {
     case 3: // Fade
       Fade();
       //Serial.println("Fading");
-      flowerState = 0;
       break;
   }
 }
