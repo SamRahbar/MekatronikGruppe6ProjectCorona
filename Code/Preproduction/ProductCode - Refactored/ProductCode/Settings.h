@@ -63,7 +63,7 @@ void ICACHE_RAM_ATTR SensorModeChange(); //Interrupt Method
 #define StepMaxSpeed 1000
 #define StepAccel 500
 int StepSpeed = 1000;
-int MotorState = 0;
+int MotorState = 1;
 
 #define motorInterfaceType 1
 

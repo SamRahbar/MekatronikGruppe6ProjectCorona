@@ -2,22 +2,31 @@ void Bloom() {
   //Serial.println("Blooming");
 
   switch (MotorState) {
-    case 0: // Motor
+    case 0: //Motor StartMove
+      if (SwitchLim1 == HIGH) {
+        myStepper.runSpeed();
+      }
+      else {
+        MotorState = 1;
+        Serial.println("Stepper Off of switch");
+      }
+      break;
+    case 1: // Motor
       if (startMotor == true) {
         myStepper.runSpeed();
         Serial.println("StepperRunning : " + StepSpeed);
       }
-      
+
       if (SwitchLim1 == HIGH) {
         myStepper.stop();
         startMotor = false;
-        MotorState = 1;
+        MotorState = 2;
         //SwitchLim1 = HIGH;
         Serial.println("Stepper Stopped");
         Serial.println("FadeUp Begun");
       }
       break;
-    case 1: // LED
+    case 2: // LED
       if (!FadeUpRunning) {
         fill_solid(leds, NUM_LEDS, CHSV(MaxHue, MaxSat, MaxVal));
         CurHue = MinHue; CurSat = MaxSat; CurVal = 0;
@@ -38,7 +47,7 @@ void Bloom() {
         Serial.println("FadeUpStopped");
         if (startMotor == false) {
           Serial.println("Flowerstate 2");
-          MotorState = 0;
+          MotorState = 1;
           FadeUpRunning = false;
           flowerState = 2;
         }

@@ -66,17 +66,17 @@ void MQTTParser() {
     MaxVal = data[6].toInt();
     MinVal = data[3].toInt();
   }
-  
+
   //Serial.println(String("MaxHue = ") + MaxHue + " : MinHue = " + MinHue);
   //Serial.println(String("MaxSat = ") + MaxSat + " : MinSat = " + MinSat);
   //Serial.println(String("MaxVal = ") + MaxVal + " : MinVal = " + MinVal);
-  
+
 
   //----COLOR TIME DEFINERS-----
   HueT = data[7].toInt();
   SatT = data[8].toInt();
   ValT = data[9].toInt();
-  
+
   //----STEPPER ACCEL DEFINE-----
   //StepSpeed = data[10].toInt();
   //myStepper.setSpeed(data[10].toInt());
@@ -84,11 +84,15 @@ void MQTTParser() {
 
   if (data[0] == "Bloom") {
     myStepper.setSpeed(StepSpeed);//StepSpeed);
+    myStepper.setCurrentPosition(0);
+    myStepper.moveTo(100);
     startMotor = true;
     flowerState = 1;
   }
   else if (data[0] == "Fade") {
     myStepper.setSpeed(-StepSpeed);//-StepSpeed);
+    myStepper.setCurrentPosition(0);
+    myStepper.moveTo(100);
     startMotor = true;
     flowerState = 3;
   }
