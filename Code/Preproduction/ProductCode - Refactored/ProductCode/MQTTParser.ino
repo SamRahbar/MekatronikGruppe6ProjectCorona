@@ -1,7 +1,7 @@
 void MQTTParser() {
 
   //-----STRING ARRAY PARSER-----
-  String data[10];//Defines array of information expected
+  String data[11];//Defines array of information expected
   bool curQot = false;//Bool to detect if we are inside quotation marks
   int curDat = 0;//Int to keep track of current data index
   for (int i = 0; i < payload.length(); i++) { //Splits up the string array we receive from NodeRed into a stringarray we can use in arduino
@@ -34,7 +34,18 @@ void MQTTParser() {
   data[9].remove(0, 1); //VTime
   data[10].remove(0, 1); //MotorSpeed
 
-  //Serial.println("Data array = " + data[0] + " : " + data[1]);
+  Serial.print("Data array = ");
+  Serial.print(data[0] + " : ");
+  Serial.print(data[1] + " : ");
+  Serial.print(data[2] + " : ");
+  Serial.print(data[3] + " : ");
+  Serial.print(data[4] + " : ");
+  Serial.print(data[5] + " : ");
+  Serial.print(data[6] + " : ");
+  Serial.print(data[7] + " : ");
+  Serial.print(data[8] + " : ");
+  Serial.print(data[9] + " : ");
+  Serial.println(data[10]);
 
   //---- COLOR DATA CONVERTER----
   //----HUE----
@@ -78,21 +89,18 @@ void MQTTParser() {
   ValT = data[9].toInt();
 
   //----STEPPER ACCEL DEFINE-----
-  //StepSpeed = data[10].toInt();
+  StepSpeed = data[10].toInt();
   //myStepper.setSpeed(data[10].toInt());
-  //Serial.println("Stepper Acceleration = " + StepSpeed);
+  Serial.print("Stepper Speed = ");
+  Serial.println(StepSpeed);
 
   if (data[0] == "Bloom") {
     myStepper.setSpeed(StepSpeed);//StepSpeed);
-    myStepper.setCurrentPosition(0);
-    myStepper.moveTo(100);
     startMotor = true;
     flowerState = 1;
   }
   else if (data[0] == "Fade") {
     myStepper.setSpeed(-StepSpeed);//-StepSpeed);
-    myStepper.setCurrentPosition(0);
-    myStepper.moveTo(100);
     startMotor = true;
     flowerState = 3;
   }

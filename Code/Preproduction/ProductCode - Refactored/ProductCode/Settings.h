@@ -59,11 +59,11 @@ void ICACHE_RAM_ATTR SensorModeChange(); //Interrupt Method
 //-----MOTOR SETTINGS------
 #define dirPin D6
 #define stepPin D5
-#define StepDistance 500
-#define StepMaxSpeed 1000
-#define StepAccel 500
+//#define StepDistance 500
+#define StepMaxSpeed 2500
+//#define StepAccel 1000
 int StepSpeed = 1000;
-int MotorState = 1;
+int MotorState = 0;
 
 #define motorInterfaceType 1
 

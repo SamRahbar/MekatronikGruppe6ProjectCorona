@@ -4,6 +4,7 @@ void Fade() {
   switch (MotorState) {
     case 0: //Motor StartMove
       if (SwitchLim1 == HIGH) {
+        Serial.println("MotorMoveOffSwitch");
         myStepper.runSpeed();
       }
       else {
@@ -12,18 +13,16 @@ void Fade() {
       }
       break;
     case 1: // Motor
-      if (startMotor == true) {
-        myStepper.runSpeed();
-        Serial.println("StepperRunning : " + StepSpeed);
-      }
-
-      if (SwitchLim2 == HIGH) {
+if (SwitchLim1 == HIGH) {
         myStepper.stop();
-        startMotor = false;
         MotorState = 2;
-        //SwitchLim2 = HIGH;
+        //SwitchLim1 = HIGH;
         Serial.println("Stepper Stopped");
-        Serial.println("FadeDown Begun");
+        Serial.println("FadeUp Begun");
+      }
+      else {
+        myStepper.runSpeed();
+        Serial.println("StepperRunning");
       }
       break;
     case 2: // LED
@@ -45,7 +44,7 @@ void Fade() {
       else {
         Serial.println("FadeDownStopped");
         if (startMotor == false) {
-          MotorState = 1;
+          MotorState = 0;
           FadeDownRunning = false;
           flowerState = 0;
         }

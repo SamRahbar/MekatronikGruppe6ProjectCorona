@@ -38,7 +38,7 @@ void setup() {
 
 void loop() {
   //Serial.println(String("Switch 1 : ") + digitalRead(Switch1) + String(" || Switch 2 : ") + digitalRead(Switch2));
-  Serial.println(String("SwitchLim 1 : ") + digitalRead(SwitchLim1) + String(" || SwitchLim 2 : ") + digitalRead(SwitchLim2));
+  //Serial.println(String("SwitchLim 1 : ") + digitalRead(SwitchLim1) + String(" || SwitchLim 2 : ") + digitalRead(SwitchLim2));
   ttime = millis();
   MQTTLoop();
   flowerStateSwitch();

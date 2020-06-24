@@ -4,6 +4,7 @@ void Bloom() {
   switch (MotorState) {
     case 0: //Motor StartMove
       if (SwitchLim1 == HIGH) {
+        Serial.println("MotorMoveOffSwitch");
         myStepper.runSpeed();
       }
       else {
@@ -14,7 +15,7 @@ void Bloom() {
     case 1: // Motor
       if (startMotor == true) {
         myStepper.runSpeed();
-        Serial.println("StepperRunning : " + StepSpeed);
+        Serial.println("StepperRunning");
       }
 
       if (SwitchLim1 == HIGH) {
@@ -47,7 +48,7 @@ void Bloom() {
         Serial.println("FadeUpStopped");
         if (startMotor == false) {
           Serial.println("Flowerstate 2");
-          MotorState = 1;
+          MotorState = 0;
           FadeUpRunning = false;
           flowerState = 2;
         }
