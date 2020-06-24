@@ -57,12 +57,12 @@ const int SensorPin = D1; //Sensor datapin
 void ICACHE_RAM_ATTR SensorModeChange(); //Interrupt Method
 
 //-----MOTOR SETTINGS------
-#define dirPin D6
-#define stepPin D5
+#define dirPin D5
+#define stepPin D6
 //#define StepDistance 500
 #define StepMaxSpeed 2500
-//#define StepAccel 1000
-int StepSpeed = 1000;
+#define StepAccel 500
+int StepSpeed = 500;
 int MotorState = 0;
 
 #define motorInterfaceType 1
@@ -76,6 +76,9 @@ volatile int SwitchLim2 = 0;
 
 //----- FLOWER STATES -----
 int flowerState = 0;
+
+bool FadeUp = false;
+bool FadeDown = false;
 
 //-----FUNCTION SETUP-----
 void callback(char* byteArraytopic, byte* byteArrayPayload, unsigned int length); // Placeholder for the callback function for later use. The function itself comes later

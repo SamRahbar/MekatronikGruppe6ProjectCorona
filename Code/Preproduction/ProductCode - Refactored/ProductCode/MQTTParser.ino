@@ -95,12 +95,14 @@ void MQTTParser() {
   Serial.println(StepSpeed);
 
   if (data[0] == "Bloom") {
-    myStepper.setSpeed(StepSpeed);//StepSpeed);
+    //myStepper.setSpeed(StepSpeed);//StepSpeed);
+    myStepper.moveTo(1000);
     startMotor = true;
     flowerState = 1;
   }
   else if (data[0] == "Fade") {
-    myStepper.setSpeed(-StepSpeed);//-StepSpeed);
+    //myStepper.setSpeed(StepSpeed);//-StepSpeed);
+    myStepper.moveTo(0);
     startMotor = true;
     flowerState = 3;
   }
